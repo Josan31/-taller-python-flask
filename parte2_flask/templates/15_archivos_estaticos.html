@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Uso de Archivos Estáticos</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/15_archivos_estaticos.css') }}">
+</head>
+<body>
+    <div class="tarjeta-moto">
+    <div class="contenedor-imagen">
+        <img src="{{ url_for('static', filename='img/bmw.jpg') }}" alt="BMW S 1000 RR">
+    </div>
+    <div class="info-moto">
+        <span class="marca">BMW Motorrad</span>
+        <h3>BMW S 1000 RR</h3>
+        <p>El superdeportivo definitivo. Diseñado para dominar la pista con una aerodinámica perfecta y una potencia pura que corta el viento.</p>
+        <span class="badge">Superbike</span>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+/* Tarjeta contenedora de la moto */
+.tarjeta-moto {
+    background-color: #1e1e24;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 450px;
+    overflow: hidden;
+    margin: 20px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #2a2a35;
+}
+
+/* hover */
+.tarjeta-moto:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    border-color: #0066ff;
+}
+
+/* Contenedor de la foto */
+.contenedor-imagen {
+    background: #ffffff;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-imagen img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.5s ease;
+}
+
+/* Hover img */
+.tarjeta-moto:hover .contenedor-imagen img {
+    transform: scale(1.05);
+}
+
+/* Información de texto abajo */
+.info-moto {
+    padding: 25px;
+    color: #ffffff;
+}
+
+.info-moto .marca {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #0066ff;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.info-moto h3 {
+    margin: 0 0 10px 0;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.info-moto p {
+    color: #a0a0b0;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Etiqueta de la categoría */
+.badge {
+    background-color: #ff003c; 
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-block;
+}

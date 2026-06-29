@@ -1,0 +1,10 @@
+<!-- Esta página lleva SOLO el contenido que se quiere tener en la ágina inicio, ya que el resto lo hereda de 16_base.html-->
+
+{% extends "16_base.html" %}
+
+{% block titulo %}Página de Inicio{% endblock %}
+
+{% block contenido %}
+    <h2>Bienvenido a la sección de Inicio</h2>
+    <p>Este texto se está renderizando dentro del bloque dinámico sin repetir el header ni el footer.</p>
+{% endblock %}

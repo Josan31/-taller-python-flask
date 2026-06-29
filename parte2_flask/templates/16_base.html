@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block titulo %}Mi Sitio SENA{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Inicio</a> | <a href="/sobre">Sobre Nosotros</a>
+        </nav>
+    </header>
+    <hr>
+
+    <main>
+        {% block contenido %}
+        {% endblock %}
+    </main>
+
+    <hr>
+    <footer>
+        <p>2026 - Taller Flask SENA Palmira</p>
+    </footer>
+</body>
+</html>
