@@ -1,0 +1,90 @@
+<!-- informacion completa de un producto individual -->
+
+<!-- Extiende la plantilla base -->
+{% extends "base.html" %}
+
+<!-- Bloque de titulo -->
+{% block titulo %}{{ producto['nombre'] }} — Tienda Flask{% endblock %}
+
+<!-- Bloque de contenido -->
+{% block contenido %}
+
+<!-- Enlace para volver al catalogo -->
+<a href="{{ url_for('tienda') }}" class="btn btn-secundario" style="margin-bottom: 32px; display: inline-block;">
+    ← Volver a la tienda
+</a>
+
+<div class="detalle-contenedor">
+
+    <!-- Columna izquierda: imagen -->
+    <div>
+        <!-- Muestra la imagen del producto si existe -->
+        {% if producto['imagen'] %}
+            <img
+                class="detalle-img"
+                src="{{ url_for('static', filename='img/productos/' + producto['imagen']) }}"
+                alt="{{ producto['nombre'] }}"
+            >
+        <!-- Si no hay imagen, muestra un placeholder que es un emoji de caja-->
+        {% else %}
+            <div class="detalle-img-placeholder">📦</div>
+        {% endif %}
+    </div>
+
+    <!-- Columna derecha: datos del producto -->
+    <div class="detalle-info">
+
+        <!-- Etiqueta de categoría -->
+        <span class="badge-categoria">{{ producto['categoria'] }}</span>
+
+        <!-- Nombre del producto -->
+        <h1>{{ producto['nombre'] }}</h1>
+
+        <!-- Precio con formato -->
+        <p class="precio-grande">${{ "{:,.0f}".format(producto['precio']).replace(",", ".") }}</p>
+
+        <!-- Tabla con los campos adicionales del producto -->
+        <div class="detalle-filas">
+            
+            <!-- ID del producto -->
+            <div class="detalle-fila">
+                <span class="etiqueta">ID</span>
+                <span class="valor">#{{ producto['id'] }}</span>
+            </div>
+            
+            <!-- Categoría del producto -->
+            <div class="detalle-fila">
+                <span class="etiqueta">Categoría</span>
+                <span class="valor">{{ producto['categoria'] }}</span>
+            </div>
+            
+            <!-- Stock del producto -->
+            <div class="detalle-fila">
+                <span class="etiqueta">Stock disponible</span>
+                <span class="valor">{{ producto['stock'] }} unidades</span>
+            </div>
+            
+            <!-- Imagen del producto -->
+            <div class="detalle-fila">
+                <span class="etiqueta">Imagen</span>
+                <span class="valor">
+                    {% if producto['imagen'] %}{{ producto['imagen'] }}{% else %}Sin imagen{% endif %}
+                </span>
+            </div>
+        </div>
+
+        <!-- Acciones -->
+        <div class="detalle-acciones">
+            <!-- Enlace para agregar otro producto -->
+            <a href="{{ url_for('agregar') }}" class="btn btn-primario">+ Agregar otro</a>
+            
+            <!-- Formulario para eliminar el producto -->
+            <form action="{{ url_for('eliminar', producto_id=producto['id']) }}" method="POST">
+                <button type="submit" class="btn btn-peligro">Eliminar producto</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

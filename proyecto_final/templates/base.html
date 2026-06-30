@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}Tienda Flask{% endblock %}</title>
+    <!-- url_for que apunta a la carpeta static/ del proyecto -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+</head>
+<body>
+
+    <!-- Navbar compartido en todas las vistas -->
+    <header class="navbar">
+
+        <!-- Logo: enlace a la vista tienda con url_for -->
+        <a href="{{ url_for('tienda') }}" class="logo">Tienda<span>.</span>Flash</a>
+
+        <!-- Barra de busqueda: envia GET a / con el parametro ?q=... -->
+        <!-- El valor del input se mantiene despues de buscar gracias a la variable busqueda -->
+        <form class="navbar-busqueda" action="{{ url_for('tienda') }}" method="GET">
+            <input
+                type="text"
+                name="q"
+                placeholder="Buscar producto..."
+                value="{{ busqueda if busqueda is defined else '' }}"
+                autocomplete="off"
+            >
+            <button type="submit">Buscar</button>
+        </form>
+        
+        <nav>
+            <!-- Enlaces para navegar entre vistas (derecha) -->
+            <a href="{{ url_for('tienda') }}">Tienda</a>
+            <a href="{{ url_for('agregar') }}">Agregar Producto</a>
+        </nav>
+    </header>
+
+    <!-- Bloque de contenido que cada plantilla rellena -->
+    <main class="contenedor">
+        {% block contenido %}
+        {% endblock %}
+    </main>
+
+    <!-- Pie de página compartido en todas las vistas (modular) -->
+    <footer>
+        <p>2026 — Proyecto Final · Taller Python Flask</p>
+    </footer>
+
+</body>
+</html>

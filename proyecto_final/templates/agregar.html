@@ -1,0 +1,96 @@
+<!-- Extiende base modular -->
+{% extends "base.html" %}
+
+<!-- Bloque de titulo -->
+{% block titulo %}Tienda Flask — Agregar Producto{% endblock %}
+
+<!-- Bloque de contenido -->
+{% block contenido %}
+
+<div class="formulario-card">
+
+    <!-- Titulo del formulario -->
+    <h2>Nuevo Producto</h2>
+
+    <!-- Subtitulo -->
+    <p class="subtitulo">Completa los campos para registrarlo en la tienda.</p>
+
+    <!-- enctype obligatorio para que el campo de imagen funcione -->
+    <form action="{{ url_for('agregar') }}" method="POST" enctype="multipart/form-data">
+
+        <!-- Campo Nombre -->
+        <div class="campo">
+            <label for="nombre">Nombre del producto</label>
+            <input
+                type="text"
+                id="nombre"
+                name="nombre"
+                placeholder="Ej. Camiseta oversize"
+                required
+            >
+        </div>
+
+        <!-- Campo Precio -->   
+        <div class="campo">
+            <label for="precio">Precio (COP)</label>
+            <input
+                type="number"
+                id="precio"
+                name="precio"
+                placeholder="Ej. 45000"
+                min="0"
+                step="0.01"
+                required    
+            >
+            <!-- El required hace que el campo sea obligatorio y no se pueda enviar el formulario si está vacío --> 
+        </div>
+
+        <!-- Campo Categoría -->
+        <div class="campo">
+            <!-- El select permite al usuario elegir una opción de una lista desplegable  -->
+            <label for="categoria">Categoría</label>
+            <select id="categoria" name="categoria" required>
+                <option value="" disabled selected>Selecciona una categoría</option>
+                <option value="Ropa">Ropa</option>
+                <option value="Tecnología">Tecnología</option>
+                <option value="Accesorios">Accesorios</option>
+                <option value="Calzado">Calzado</option>
+                <option value="Hogar">Hogar</option>
+                <option value="Otro">Otro</option>
+            </select>
+        </div>
+        
+        <!-- Campo Stock -->
+        <!-- El min asegura que el valor sea mayor o igual a 0 -->
+        <div class="campo">
+            <label for="stock">Unidades en stock</label>
+            <input
+                type="number"
+                id="stock"
+                name="stock"
+                placeholder="Ej. 10"
+                min="0"
+                required
+            >
+        </div>
+
+        <!-- Campo Imagen -->
+        <!-- El accept limita los tipos de archivo que se pueden subir -->
+        <div class="campo">
+            <label for="imagen">Imagen del producto (opcional)</label>
+            <input
+                type="file"
+                id="imagen"
+                name="imagen"
+                accept=".jpg,.jpeg,.png,.webp"
+            >
+        </div>
+
+        <!-- Boton de envio -->
+        <button type="submit" class="btn btn-primario btn-bloque">Guardar producto</button>
+
+    </form>
+</div>
+
+<!-- Fin del bloque de contenido -->
+{% endblock %}

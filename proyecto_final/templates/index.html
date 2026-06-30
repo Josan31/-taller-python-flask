@@ -1,0 +1,85 @@
+<!-- Extiende la plantilla base -->
+{% extends "base.html" %}
+
+<!-- Contenido del titulo -->
+{% block titulo %}Tienda Flask — Productos{% endblock %}
+
+<!-- Contenido principal -->
+{% block contenido %}
+
+<div class="seccion-titulo">
+    <h1>Catálogo de Productos</h1>
+    <!-- Si hay busqueda activa, muestra el termino buscado y cuantos resultados hubo -->
+    {% if busqueda %}
+        <p>{{ productos | length }} resultado{% if productos | length != 1 %}s{% endif %} para "<strong>{{ busqueda }}</strong>"</p>
+    {% else %}
+        <p>{{ productos | length }} producto{% if productos | length != 1 %}s{% endif %} registrado{% if productos | length != 1 %}s{% endif %}</p>
+    {% endif %}
+</div>
+
+<!-- Si hay productos, los muestra en una hilera de 5 cards y si no hay, muestra un mensaje -->
+{% if productos %}
+    <div class="product-grid">
+        {% for producto in productos %}
+        <div class="card">
+
+            <!-- Imagen del producto o placeholder si no tiene, ambos clickeables al detalle -->
+            <a href="{{ url_for('detalle', producto_id=producto['id']) }}">
+                {% if producto['imagen'] %}
+                    <img
+                        class="card-img"
+                        src="{{ url_for('static', filename='img/productos/' + producto['imagen']) }}"
+                        alt="{{ producto['nombre'] }}"
+                    >
+                {% else %}
+                    <div class="card-img-placeholder">📦</div>
+                {% endif %}
+            </a>
+
+            <div class="card-body">
+                <!-- Categoria del producto -->
+                <span class="card-categoria">{{ producto['categoria'] }}</span>
+
+                <!-- Nombre del producto -->
+                <p class="card-nombre">{{ producto['nombre'] }}</p>
+
+                <!-- Precio del producto -->
+                <p class="card-precio">${{ "{:,.0f}".format(producto['precio']).replace(",", ".") }}</p> <!-- Formato para mostrar el precio con punto decimal y separador de miles -->
+
+                <!-- Stock del producto -->
+                <p class="card-stock">Stock: {{ producto['stock'] }} unidades</p>
+
+                <div class="card-acciones">
+                    <!-- Boton: ver detalle completo del producto -->
+                    <a href="{{ url_for('detalle', producto_id=producto['id']) }}" class="btn btn-primario">
+                        Ver más
+                    </a>
+                    <!-- Boton de eliminar via formulario POST -->
+                    <form action="{{ url_for('eliminar', producto_id=producto['id']) }}" method="POST">
+                        <button type="submit" class="btn btn-peligro">Eliminar</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+{% else %}
+    <!-- Estado vacio: sin productos o sin resultados para la busqueda -->
+    <div class="estado-vacio">
+        {% if busqueda %}
+            <!-- No hubo resultados para el termino buscado -->
+            <div class="icono">🔍</div>
+            <p>No se encontraron productos con "<strong>{{ busqueda }}</strong>".</p>
+            <a href="{{ url_for('tienda') }}" class="btn btn-secundario">Ver todos los productos</a>
+        {% else %}
+            <!-- La tienda esta completamente vacia -->
+            <div class="icono">🛍️</div>
+            <p>Todavía no hay productos en la tienda.</p>
+            <a href="{{ url_for('agregar') }}" class="btn btn-primario">Agregar el primero</a>
+        {% endif %}
+    </div>
+{% endif %}
+
+{% endblock %}

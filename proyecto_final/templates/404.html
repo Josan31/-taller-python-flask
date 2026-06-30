@@ -1,0 +1,16 @@
+<!-- Pagina de error 404 personalizada -->
+
+<!-- Extiende la plantilla base -->
+{% extends "base.html" %}
+
+<!-- Bloque de titulo -->
+{% block titulo %}404 — Página no encontrada{% endblock %}
+
+<!-- Bloque de contenido -->
+{% block contenido %}
+<div class="estado-vacio">
+    <div class="icono">🔍</div>
+    <p>La página que buscas no existe.</p>
+    <a href="{{ url_for('tienda') }}" class="btn btn-primario">Volver a la tienda</a>
+</div>
+{% endblock %}
